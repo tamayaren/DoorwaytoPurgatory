@@ -2,4 +2,4 @@
 ) 
 
 Contributor:
-Geia Santo
+Geia Santos
