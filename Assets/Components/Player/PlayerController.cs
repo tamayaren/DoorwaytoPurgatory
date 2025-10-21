@@ -36,6 +36,10 @@ public class PlayerController : NetworkBehaviour
     //
     private void MovePlayer(NetworkInputData input)
     {
-        this.controller.Move(this.speed * input.direction * this.Runner.DeltaTime);
+        Vector3 camForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
+        Vector3 camRight = Vector3.Scale(Camera.main.transform.right, new Vector3(1, 0, 1)).normalized;
+        
+        Vector3 move = camForward * input.direction.z + camRight * input.direction.x;
+        this.controller.Move(move * this.speed * this.Runner.DeltaTime);
     }
 }

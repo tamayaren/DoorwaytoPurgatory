@@ -1,23 +1,32 @@
 using Fusion;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class CameraManager : NetworkBehaviour
 {
-    private Camera camera;
+    [SerializeField] private Camera camera;
 
     [SerializeField] private Transform target;
     [SerializeField] private Vector3 offset;
-    
-    private void Start()
+    private float pitch;
+
+    [SerializeField] private Transform head;
+    [SerializeField] private Transform rootcamera;
+
+    public override void Spawned()
     {
-        NetworkManager.PlayerSpawned.AddListener(player =>
-        {
-            Debug.Log("Player Spawned");
-            if (player.HasInputAuthority)
-                this.target = player.transform;
-        });
+        base.Spawned();
         
+        this.target = this.transform;
         this.camera = Camera.main;
+
+        if (this.HasInputAuthority)
+        {
+            Debug.Log("Input");
+            this.rootcamera = GameObject.FindGameObjectWithTag("Root").transform;
+            this.head = this.rootcamera?.Find("Head").transform;
+            this.camera.transform.parent = this.head;
+        }
     }
 
     public override void FixedUpdateNetwork()
@@ -25,7 +34,7 @@ public class CameraManager : NetworkBehaviour
         base.FixedUpdateNetwork();
         if (!this.HasStateAuthority) return;
         if (!this.target) return;
-
+    
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         
@@ -36,8 +45,11 @@ public class CameraManager : NetworkBehaviour
         }
         Debug.Log("Nano");
         
-        
-        this.camera.transform.position = this.target.position + this.offset;
-        this.camera.transform.localRotation = Quaternion.Euler(input.view.x, 0, input.view.y);
+        this.rootcamera.transform.position = this.target.position + this.offset;
+        this.rootcamera.Rotate(Vector3.up * input.view.x);
+
+        this.pitch -= input.view.y;
+        this.pitch = Mathf.Clamp(this.pitch, -85f, 85f);
+        this.head.localRotation = Quaternion.Euler(this.pitch, 0f, 0f);
     }
 }
