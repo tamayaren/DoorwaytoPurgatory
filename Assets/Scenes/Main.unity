@@ -439,7 +439,6 @@ GameObject:
   - component: {fileID: 1285433810}
   - component: {fileID: 1285433809}
   - component: {fileID: 1285433813}
-  - component: {fileID: 1285433812}
   - component: {fileID: 1285433814}
   m_Layer: 0
   m_Name: Main Camera
@@ -522,19 +521,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1285433812
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1285433808}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a065766da9de42d7806bf5960fecef6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  offset: {x: 0, y: 5, z: -15}
 --- !u!114 &1285433813
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -595,8 +581,7 @@ MonoBehaviour:
   ObjectInterest: 1
   Flags: 262145
   NestedObjects: []
-  NetworkedBehaviours:
-  - {fileID: 1285433812}
+  NetworkedBehaviours: []
   ForceRemoteRenderTimeframe: 0
 --- !u!1 &1289125076
 GameObject:

@@ -55,9 +55,7 @@ namespace AccountNetwork
 
         public void SaveDatabase()
         {
-            Debug.Log(this.database);
             string json = JsonUtility.ToJson(this.database);
-            Debug.Log(json);
             File.WriteAllText(this.serverPath, json);
         }
 

@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class PlayerInfo : NetworkBehaviour
 {
-    public NetworkString<_16> username;
-    public NetworkString<_16> level;
-    public NetworkString<_16> exp;
-    public NetworkString<_16> lastPlayed;
+    [Networked] public NetworkString<_16> username { get; set; }
+    [Networked] public NetworkString<_16> level { get; set; }
+    [Networked] public NetworkString<_16> exp { get; set; }
+    [Networked] public NetworkString<_16> lastPlayed { get; set; }
 
     private float time;
     private ServerAccount account;
@@ -17,6 +17,11 @@ public class PlayerInfo : NetworkBehaviour
     public override void Spawned()
     {
         base.Spawned();
+        RemoteGetPlayerAccount();
+    }
+
+    public void RemoteGetPlayerAccount()
+    {
         if (this.HasInputAuthority)
         {
             string acc = PlayerPrefs.GetString("Account");
@@ -34,11 +39,9 @@ public class PlayerInfo : NetworkBehaviour
             }
         }
     }
-
     private void Update()
     {
         this.usernameText.transform.LookAt(Camera.main.transform.position + Camera.main.transform.forward * 256f);
-        
     }
 
     public override void FixedUpdateNetwork()

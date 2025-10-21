@@ -132,15 +132,8 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
     {
         NetworkInputData networkInput = new NetworkInputData();
         
-        if (Input.GetKey(KeyCode.W))
-            networkInput.direction += Vector3.forward;
-        if (Input.GetKey(KeyCode.S))
-            networkInput.direction += Vector3.back;
-        if (Input.GetKey(KeyCode.A))
-            networkInput.direction += Vector3.left;
-        if (Input.GetKey(KeyCode.D))
-            networkInput.direction += Vector3.right;
-
+        networkInput.direction = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        networkInput.view = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y") * -1);
         input.Set(networkInput);
     }
 
