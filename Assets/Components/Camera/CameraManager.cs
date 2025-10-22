@@ -39,11 +39,7 @@ public class CameraManager : NetworkBehaviour
         Cursor.visible = false;
         
         if (!GetInput(out NetworkInputData input))
-        {
-            Debug.Log("No input returned");
             return;
-        }
-        Debug.Log("Nano");
         
         this.rootcamera.transform.position = this.target.position + this.offset;
         this.rootcamera.Rotate(Vector3.up * input.view.x);
