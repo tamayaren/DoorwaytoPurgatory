@@ -40,6 +40,10 @@ public class PlayerController : NetworkBehaviour
         Vector3 camRight = Vector3.Scale(Camera.main.transform.right, new Vector3(1, 0, 1)).normalized;
         
         Vector3 move = camForward * input.direction.z + camRight * input.direction.x;
+        if (input.jumpPressed && this.controller.Grounded)
+            this.controller.Jump();
         this.controller.Move(move * this.speed * this.Runner.DeltaTime);
+        
+            
     }
 }

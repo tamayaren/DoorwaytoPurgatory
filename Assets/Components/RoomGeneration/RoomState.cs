@@ -1,6 +1,7 @@
+using Fusion;
 using UnityEngine;
 
-public class RoomState : MonoBehaviour
+public class RoomState : NetworkBehaviour
 {
     public RoomStateType state = RoomStateType.NoSpawn;
 }

@@ -134,6 +134,7 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
         
         networkInput.direction = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         networkInput.view = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
+        networkInput.jumpPressed = Input.GetKey(KeyCode.Space);
         input.Set(networkInput);
     }
 
